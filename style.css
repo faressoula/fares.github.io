@@ -1,0 +1,184 @@
+/* -------------------------------------------------------------
+   Reset & Technical Design System (8pt Grid Base)
+------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Grayscale Shading Palette */
+    --bg-color: #0b0b0b;
+    --grid-line: #161616;
+    --text-primary: #f5f5f7;
+    --text-muted: #86868b;
+    --text-dimmed: #636366;
+    
+    /* Typography */
+    --font-sans: 'Sora', 'Montserrat', sans-serif;
+}
+
+html, body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* -------------------------------------------------------------
+   Background Subtle Pattern
+------------------------------------------------------------- */
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+/* -------------------------------------------------------------
+   Header Navigation
+------------------------------------------------------------- */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 32px 24px; /* 8pt alignment */
+    z-index: 10;
+    background: linear-gradient(to bottom, var(--bg-color) 40%, transparent);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+}
+
+.nav-link {
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 400;
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover, 
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+/* -------------------------------------------------------------
+   Main Layout & Typographic Letter
+------------------------------------------------------------- */
+.main-layout {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 24px 100px 24px; /* Space for fixed header/footer */
+    z-index: 5;
+}
+
+.letter-container {
+    max-width: 640px; /* Optimal reading line-length */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* Strict 8pt vertical rhythm */
+    animation: fadeInLayout 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Typographic Hierarchy inside the Letter */
+.letter-lead {
+    font-size: 2.25rem; /* 36px */
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+}
+
+.letter-container p {
+    font-size: 1.0625rem; /* 17px */
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+.letter-highlight {
+    color: var(--text-primary) !important;
+    font-weight: 400 !important;
+}
+
+.letter-conclusion {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+    color: var(--text-primary);
+    margin-top: 16px;
+    border-top: 1px solid var(--grid-line);
+    padding-top: 24px;
+}
+
+/* -------------------------------------------------------------
+   Footer
+------------------------------------------------------------- */
+.site-footer {
+    position: relative;
+    width: 100%;
+    padding: 32px 24px;
+    text-align: center;
+    z-index: 10;
+    background: linear-gradient(to top, var(--bg-color) 40%, transparent);
+}
+
+.site-footer p {
+    font-size: 0.75rem; /* 12px */
+    color: var(--text-dimmed);
+    letter-spacing: 0.05em;
+}
+
+/* -------------------------------------------------------------
+   Animations
+------------------------------------------------------------- */
+@keyframes fadeInLayout {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Scaling */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 24px;
+    }
+    .nav-container {
+        gap: 32px;
+    }
+    .letter-lead {
+        font-size: 1.75rem;
+    }
+    .letter-container p {
+        font-size: 1rem;
+    }
+}
